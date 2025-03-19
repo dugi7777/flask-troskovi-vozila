@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator troškova vozila</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator troškova vozila</h1>
+        <form method="POST">
+            <label>Godišnja kilometraža:</label>
+            <input type="text" name="kilometraza" required>
+            <label>Potrošnja (L/100km):</label>
+            <input type="text" name="potrosnja" required>
+            <label>Trenutna cijena goriva po litri (€):</label>
+            <input type="text" name="cijena_goriva" required>
+            <label>Mjesečna rata kredita (€):</label>
+            <input type="text" name="rata_kredita" required>
+            <label>Godišnja cijena osiguranja (€):</label>
+            <input type="text" name="osiguranje" required>
+            <label>Godišnja cijena servisa (€):</label>
+            <input type="text" name="servis" required>
+            <label>Godišnji porez (€):</label>
+            <input type="text" name="porez" required>
+            <button type="submit">Izračunaj</button>
+        </form>
+        {% if rezultat %}
+            <h2>Rezultati</h2>
+            <p>Ukupni godišnji trošak: {{ ukupni_trosak }} €</p>
+            <p>Tjedni trošak: {{ tjedni_trosak }} €</p>
+            <p>Trošak po kilometru: {{ trosak_po_km }} €/km</p>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Grafikon">
+        {% endif %}
+        {% if greska %}
+            <p class="error">{{ greska }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
